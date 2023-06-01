@@ -159,21 +159,20 @@ public class Device {
                 System.out.println("주문이 완료되지 않았습니다.");
                 System.out.println("(초기 메뉴판으로 돌아갑니다.)");
                 Thread.sleep(500);
-            } else if (optionInput == numbering + 1) {//Cancel취소하기 선택시
-                System.out.println("진행하던 주문을 취소하겠습니까?");
-                System.out.println("1. 확인     2. 취소");
-                input = sc.nextInt();
-                if (optionInput == 1) {
-                    order.CancelOrder();
-                    System.out.println("진행하던 주문이 취소되었습니다. 이전 화면으로 돌아갑니다.");
-                    Thread.sleep(500);
-                }
-                if (optionInput == 2) {
-                    System.out.println("주문이 취소되지 않았습니다. 이전 화면으로 돌아갑니다.");
-                    Thread.sleep(500);
-                }
             }
-
+        } else if (input == numbering + 1) {//Cancel취소하기 선택시
+            System.out.println("진행하던 주문을 취소하겠습니까?");
+            System.out.println("1. 확인     2. 취소");
+            optionInput= sc.nextInt();
+            if (optionInput == 1) {
+                order.CancelOrder();
+                System.out.println("진행하던 주문이 취소되었습니다. 이전 화면으로 돌아갑니다.");
+                Thread.sleep(500);
+            }
+            if (optionInput == 2) {
+                System.out.println("주문이 취소되지 않았습니다. 이전 화면으로 돌아갑니다.");
+                Thread.sleep(500);
+            }
         }
         return input;//선택한 번호 전달
     }
