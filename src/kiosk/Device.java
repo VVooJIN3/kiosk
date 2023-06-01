@@ -19,11 +19,11 @@ public class Device {
         categoryMenu.add(drinksMenu);
         categoryMenu.add(beerMenu);
 
-        Product shackBurger = new Product("ShackBurger", "토마토, 양상추, 쉑소스가 토핑된 치즈버거", 6.9, "Burgers");
-        Product smokeShack = new Product("SmokeShack", "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거", 8.9, "Burgers");
+        Product shackBurger = new Product("ShackBurger", "토마토, 양상추, 쉑소스가 토핑된 치즈버거", 6.9, 10.9,"Burgers");
+        Product smokeShack = new Product("SmokeShack", "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거", 8.9, 12.9,"Burgers");
         Product shroomBurger = new Product("Shroom Burger", "몬스터 치즈와 체다 치즈로 속을 채운 베지테리안 버거", 9.4, "Burgers");
-        Product cheeseBurger = new Product("Cheeseburger", "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거", 5.4, "Burgers");
-        Product hamBurger = new Product("Hamburger", "비프패티를 기반으로 야채가 들어간 기본버거", 6.9, "Burgers");
+        Product cheeseBurger = new Product("Cheeseburger", "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거", 6.9,10.9, "Burgers");
+        Product hamBurger = new Product("Hamburger", "비프패티를 기반으로 야채가 들어간 기본버거", 6.9,9.0, "Burgers");
         allProducts.add(shackBurger);
         allProducts.add(smokeShack);
         allProducts.add(shroomBurger);
@@ -69,6 +69,7 @@ public class Device {
             int numbering;          // 번호매김을 위한 변수 numbering 선언 (카테고리나 메뉴 갯수 변경 따른 유동적인 번호부여를 고려하여 numbering 사용)
             int selectCategoryNum;  // 카테고리메뉴판에서 선택한 카테고리번호
             int selectProductNum;   // 상품메뉴판에서 선택한 상품번호
+
             //(1)카테고리 메뉴판
             numbering = ShowMenu();                                     //1. 카테고리메뉴판 보여주기(번호매김 후 숫자 값 리턴)
             ShowOption(numbering);                                      //옵션메뉴(order/cancel) 보여주기 (order/cancel에 부여할 동적 번호를 인자값으로 전달)
@@ -94,7 +95,7 @@ public class Device {
         System.out.println("\"SHAKESHACK BURGER 에 오신 걸 환영합니다.\"");
         System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
         System.out.println("[ SHAKESHACK MENU ]");
-        for (Menu item : categoryMenu) { // 카테고리 보여주기
+        for (Menu item : categoryMenu) { // 카테고리 보여주기 categoryMenu -  Arraylist.
             System.out.print(numbering + ". ");//번호매김 1. 2. 3. (카테고리 추가를 고려하여 numbering 사용)
             item.Show();
             numbering++;
