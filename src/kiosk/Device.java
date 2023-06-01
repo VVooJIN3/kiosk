@@ -8,6 +8,7 @@ public class Device {
     private ArrayList<Menu> categoryMenu = new ArrayList<Menu>(); // 카테고리 메뉴판
     private ArrayList<Product> allProducts = new ArrayList<Product>(); // 전체상품
     private ArrayList<Product> categoryProduct = new ArrayList<Product>(); // 카테고리 상품 메뉴판
+    private double revenue;
 
     public void LoadMenu() { //카테고리메뉴와 상품메뉴를 리스트에 담기
         Menu burgersMenu = new Menu("Burgers", "앵거스 비프 통살을 다져만든 버거");
@@ -34,8 +35,8 @@ public class Device {
         Product shakeOfTheWeek = new Product("Shake of the Week", "특별한 커스터드 플레이버", 6.5, "Frozen Custard");
         Product redBeanShake = new Product("Red Bean Shake", "신선한 커스터드와 함께 우유와 레드빈이 블렌딩 된 시즈널 쉐이크", 6.5, "Frozen Custard");
         Product floats = new Product("Floats", "루트 비어, 퍼플 카우, 크림 시클", 5.9, "Frozen Custard");
-        Product cupsAndCones = new Product("Cups & Cones", "바닐라, 초콜렛, Flavor of the Week", 4.9, "Frozen Custard");
-        Product concretes = new Product("Concretes", "쉐이크쉑의 쫀득한 커스터드와 다양한 믹스-인의 조합", 5.9, "Frozen Custard");
+        Product cupsAndCones = new Product("Cups & Cones", "바닐라, 초콜렛, Flavor of the Week", 4.9,5.9, "Frozen Custard");
+        Product concretes = new Product("Concretes", "쉐이크쉑의 쫀득한 커스터드와 다양한 믹스-인의 조합", 5.9,8.9, "Frozen Custard");
         Product shackAttack = new Product("Shack Attack", "초콜렛 퍼지소스, 초콜렛 트러플 쿠키, Lumiere 초콜렛 청크와 스프링클이 들어간 진한 초콜렛 커스터드", 5.9, "Frozen Custard");
         allProducts.add(shakes);
         allProducts.add(shakeOfTheWeek);
@@ -75,7 +76,7 @@ public class Device {
             ShowOption(numbering);                                      //옵션메뉴(order/cancel) 보여주기 (order/cancel에 부여할 동적 번호를 인자값으로 전달)
             selectCategoryNum = getResponse(numbering, categoryMenu);   //사용자 응답.사용자 응답에 따른 결과를 전달받음
 
-            if (selectCategoryNum >= numbering) {                       //order/cancel 번호를를 선택하였을 경우  : 초기로 돌아가기
+            if (selectCategoryNum >= numbering || selectCategoryNum == 0) {                       //order/cancel 번호 또는 옵션(0) 선택하였을 경우  : 초기로 돌아가기
                 continue;
             }
             //(2)상세 메뉴판
@@ -83,7 +84,7 @@ public class Device {
             ShowOption(numbering);                                       //옵션메뉴(order/cancel) 보여주기 (order/cancel에 부여할 동적 번호를 인자값으로 전달)
             selectProductNum = getResponse(numbering, categoryProduct); //사용자 응답. 응답에 따라 메뉴추가 또는 order/cancel
 
-            if (selectProductNum >= numbering) {                         //order/cancel 번호를 선택하였을 경우  : 초기로 돌아가기
+            if (selectProductNum >= numbering || selectCategoryNum == 0) {                         //order/cancel 번호를 선택하였을 경우  : 초기로 돌아가기
                 continue;
             }
             order.AddOrder(categoryProduct.get(selectProductNum - 1)); //선택한 상품 객체를 Addorder메서드의 인자값으로 전달
@@ -145,9 +146,10 @@ public class Device {
             System.out.println("W " + totalPrice + "\n");
             System.out.println("1. 주문     2. 메뉴판");
             optionInput = sc.nextInt();
-            if (optionInput == 1) {
+            if (optionInput == 1 && totalPrice !=0) {
                 System.out.println("주문이 완료되었습니다!");
                 System.out.println("대기번호는 [ " + order.CompleteOrder() + " ]번 입니다."); //장바구니를 비우고, 대기번호 리턴받음
+                revenue +=totalPrice; // 주문한 가격만큼 수익에 계산
                 System.out.println("(3초 후 초기 메뉴판으로 돌아갑니다.)");
                 Thread.sleep(1000);
                 System.out.println("(2초 후 초기 메뉴판으로 돌아갑니다.)");
@@ -156,6 +158,11 @@ public class Device {
                 Thread.sleep(1000);
             } else if (optionInput == 2) {
                 System.out.println("주문이 완료되지 않았습니다.");
+                System.out.println("(초기 메뉴판으로 돌아갑니다.)");
+                Thread.sleep(500);
+            }
+            else if(totalPrice==0){
+                System.out.println("주문하신 내용이 없습니다.");
                 System.out.println("(초기 메뉴판으로 돌아갑니다.)");
                 Thread.sleep(500);
             }
@@ -173,6 +180,23 @@ public class Device {
                 Thread.sleep(500);
             }
         }
+        else if (input == 0) { //옵션 기능 선택 시
+            System.out.println("[ 총 판매금액 현황 ]");
+
+            System.out.println("현재까지 총 판매된 금액은 [ W "+Math.round((revenue*100))/100.0 +"] 입니다.\n"); //소수점 둘째자리까지 나타내고 반올림 ( 자바는 IEEE 754 부동 소수점 방식 - 근사치 제공에 의해 소수 오차 발생 방지)
+            while(true) {
+                System.out.println("1. 돌아가기");
+                optionInput = sc.nextInt();
+                if (optionInput == 1) {
+                    System.out.println("이전 화면으로 돌아갑니다.");
+                    break;
+                }
+                else{
+                    System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                }
+            }
+        }
+
         return input;//선택한 번호 전달
     }
 }

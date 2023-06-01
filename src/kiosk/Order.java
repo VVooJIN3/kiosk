@@ -9,21 +9,24 @@ public class Order {
     private HashSet<Product> soldProduct = new HashSet<Product>();
     private int counter = 0;
 
+
     public void AddOrder(Product product) {
         Scanner sc = new Scanner(System.in);
         int input;
-        product.Show();
+
         if (product.getSizeupPrice() != 0) { //사이즈업이 있을때
+            product.Show();
             Product sizeupProduct = new Product(product.getName(), product.getDescription(), product.getSizeupPrice(), product.getCategory());
             System.out.println("위 메뉴의 어떤 옵션으로 추가하시겠습니까?");
-            System.out.println("1. M(W " + product.getPrice() + ")          2. L(W " + sizeupProduct.getPrice() + ")");
+            System.out.println("1. Single(W " + product.getPrice() + ")          2. Double(W " + sizeupProduct.getPrice() + ")");
             input = sc.nextInt();
             if (input == 1) { //기본 사이즈
                 question(product);
             } else if (input == 2) {//사이즈업
                 question(sizeupProduct);
             }
-        }
+        } else
+            question(product);
     }
     public void question (Product product) {
         Scanner sc = new Scanner(System.in);
