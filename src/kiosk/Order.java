@@ -52,7 +52,7 @@ public class Order {
         return totalprice;
     }
     public int CompleteOrder() {
-
+        soldProduct.addAll(shoppingBag);
         shoppingBag.clear();//
         counter++;          //대기번호 +1
         return counter;
@@ -60,5 +60,14 @@ public class Order {
 
     public void CancelOrder() {
         shoppingBag.clear();
+    }
+    public void SoldList(){
+        System.out.println("[ 총 판매상품 목록 현황 ]");
+        System.out.println("현재까지 총 판매된 상품 목록은 아래와 같습니다.");
+        for(Product item : soldProduct){
+            System.out.println(item.getName()+" | W"+item.getPrice());
+        }
+
+
     }
 }

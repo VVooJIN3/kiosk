@@ -182,8 +182,8 @@ public class Device {
         }
         else if (input == 0) { //옵션 기능 선택 시
             System.out.println("[ 총 판매금액 현황 ]");
-
             System.out.println("현재까지 총 판매된 금액은 [ W "+Math.round((revenue*100))/100.0 +"] 입니다.\n"); //소수점 둘째자리까지 나타내고 반올림 ( 자바는 IEEE 754 부동 소수점 방식 - 근사치 제공에 의해 소수 오차 발생 방지)
+            order.SoldList();
             while(true) {
                 System.out.println("1. 돌아가기");
                 optionInput = sc.nextInt();
