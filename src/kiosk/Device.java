@@ -72,7 +72,7 @@ public class Device {
             //(1)카테고리 메뉴판
             numbering = ShowMenu();                                     //1. 카테고리메뉴판 보여주기(번호매김 후 숫자 값 리턴)
             ShowOption(numbering);                                      //옵션메뉴(order/cancel) 보여주기 (order/cancel에 부여할 동적 번호를 인자값으로 전달)
-            selectCategoryNum = getResponse(numbering, categoryMenu);   //사용자 응답.사용자 응답에 따른 결과를 String으로 전달받음
+            selectCategoryNum = getResponse(numbering, categoryMenu);   //사용자 응답.사용자 응답에 따른 결과를 전달받음
 
             if (selectCategoryNum >= numbering) {                       //order/cancel 번호를를 선택하였을 경우  : 초기로 돌아가기
                 continue;
@@ -91,7 +91,6 @@ public class Device {
 
     public int ShowMenu() { //메뉴판
         int numbering = 1;
-        Scanner sc = new Scanner(System.in);
         System.out.println("\"SHAKESHACK BURGER 에 오신 걸 환영합니다.\"");
         System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
         System.out.println("[ SHAKESHACK MENU ]");
@@ -107,7 +106,6 @@ public class Device {
         int numbering = 1;
         String menuName;
         categoryProduct.clear(); // 이전 카테고리메뉴가 남아 있을 시 지우기
-        Scanner sc = new Scanner(System.in);
         System.out.println("\"SHAKESHACK BURGER 에 오신 걸 환영합니다.\"");
         System.out.println("아래 상품 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
         menuName = categoryMenu.get(selectCategoryNum - 1).getName(); //선택한 카테고리명 가져오기
