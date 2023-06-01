@@ -72,7 +72,7 @@ public class Device {
             //(1)카테고리 메뉴판
             numbering = ShowMenu();                                     //1. 카테고리메뉴판 보여주기(번호매김 후 숫자 값 리턴)
             ShowOption(numbering);                                      //옵션메뉴(order/cancel) 보여주기 (order/cancel에 부여할 동적 번호를 인자값으로 전달)
-            selectCategoryNum = getResponse(numbering, categoryMenu);   //사용자 응답.사용자 응답에 따른 결과를 String으로 전달받음
+            selectCategoryNum = getResponse(numbering, categoryMenu);   //사용자 응답.사용자 응답에 따른 결과를 전달받음
 
             if (selectCategoryNum >= numbering) {                       //order/cancel 번호를를 선택하였을 경우  : 초기로 돌아가기
                 continue;
