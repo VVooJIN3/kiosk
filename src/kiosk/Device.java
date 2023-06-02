@@ -84,7 +84,7 @@ public class Device {
             ShowOption(numbering);                                       //옵션메뉴(order/cancel) 보여주기 (order/cancel에 부여할 동적 번호를 인자값으로 전달)
             selectProductNum = getResponse(numbering, categoryProduct); //사용자 응답. 응답에 따라 메뉴추가 또는 order/cancel
 
-            if (selectProductNum >= numbering || selectCategoryNum == 0) {                         //order/cancel 번호를 선택하였을 경우  : 초기로 돌아가기
+            if (selectProductNum >= numbering || selectProductNum == 0) {                         //order/cancel 번호를 선택하였을 경우  : 초기로 돌아가기
                 continue;
             }
             order.AddOrder(categoryProduct.get(selectProductNum - 1)); //선택한 상품 객체를 Addorder메서드의 인자값으로 전달
