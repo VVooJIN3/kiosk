@@ -33,9 +33,6 @@ public class Product extends Menu {
     public String getCategory(){
         return category;
     }
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     @Override
     public void Show()
