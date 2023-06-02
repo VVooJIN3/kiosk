@@ -69,7 +69,8 @@ public class Order {
         System.out.println("[ 총 판매상품 목록 현황 ]");
         System.out.println("현재까지 총 판매된 상품 목록은 아래와 같습니다.");
         for(Product item : soldProduct){
-            System.out.println(item.getName()+" | W"+item.getPrice());
+            System.out.printf("%-20s | W %s\n",item.getName(), item.getPrice());
+
         }
 
 
